@@ -1,10 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/test">Test</router-link>
-  </nav>
+
   <router-view/>
 </template>
+
+/* <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/create">Create</router-link> |
+    <router-link to="/edit">Edit</router-link> |
+    <router-link to="/view">View</router-link> 
+  </nav> */
 
 <style lang="scss">
 #app {
