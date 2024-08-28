@@ -1,15 +1,17 @@
 <template>
-
-  <router-view/>
-</template>
-
-/* <nav>
+  <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/login">Login</router-link> |
     <router-link to="/create">Create</router-link> |
     <router-link to="/edit">Edit</router-link> |
     <router-link to="/view">View</router-link> 
-  </nav> */
+    <br>
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/signup">Sign up</router-link>
+  </nav> 
+  <router-view/>
+</template>
+
+
 
 <style lang="scss">
 #app {
@@ -28,7 +30,7 @@ nav {
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #2dc9a5;
     }
   }
 }
