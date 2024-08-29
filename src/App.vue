@@ -35,3 +35,28 @@ nav {
   }
 }
 </style>
+<script>
+
+import { auth } from '@/firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+export default {
+  data() {
+    return {
+      currentUser: null
+    };
+  },
+  created() { 
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.currentUser = user; 
+        console.log(user.email + "is logged in");
+      } else {
+        alert("No one is logged in");
+      }
+    });
+  }
+};
+
+
+</script>
