@@ -16,5 +16,6 @@ const firebaseConfig = {
 
   const auth = getAuth(app);
   const firestore = getFirestore(app)
+  //const signout = signOut(app)
 
 export {app, auth, firestore};

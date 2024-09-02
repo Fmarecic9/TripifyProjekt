@@ -9,6 +9,8 @@
     <router-link to="/signup">Sign up</router-link>
   </nav> 
   <router-view/>
+
+  <button type="button" class="logout" @click="logout">Logout</button>
 </template>
 
 
@@ -38,7 +40,8 @@ nav {
 <script>
 
 import { auth } from '@/firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+
 
 export default {
   data() {
@@ -50,13 +53,35 @@ export default {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.currentUser = user; 
-        console.log(user.email + "is logged in");
+        console.log(user.email + " is logged in");
       } else {
-        alert("No one is logged in");
+        console.log("No one is logged in");
       }
     });
-  }
-};
+  },
+  checkUser(){
+      onAuthStateChanged(auth, (user) => {
+      if (currentUser != null) {
+        this.$router.push({ name: 'home' });
+      } else {
+        this.$router.push({ name: 'login' });
+      }
+    });   // trenutno samo ideja 
+  },
+  methods:{
+  logout(){
+      signOut(auth)
+        .then(() => {
+          console.log("User has been logged out");
+          this.$router.push({name:"login"})
+        })
+        .catch((error) => {
+          console.error("User is not logged in ", error);
+        });
+    }
+
+    }
+  };
 
 
 </script>
