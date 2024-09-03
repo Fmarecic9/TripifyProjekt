@@ -1,16 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/create">Create</router-link> |
-    <router-link to="/edit">Edit</router-link> |
-    <router-link to="/view">View</router-link> 
-    <br>
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/signup">Sign up</router-link>
+  <nav class = "navigacija">
+    <ul class = "links">
+    <li v-if="this.currentUser != null">
+    <router-link to="/">Home</router-link> | |
+    <router-link to="/create">Create</router-link> | | 
+    <router-link to="/edit">Edit</router-link> | | 
+    <router-link to="/view">View</router-link>  
+    </li>
+ 
+    <li v-if="this.currentUser == null">
+    <router-link to="/login">Login</router-link> | |
+    <router-link to="/signup">Sign up</router-link>     
+    </li>
+    <router-link to="/login"><button type="button" class="btn btn-secondary btn-sm" @click="logout" v-if="this.currentUser != null">Logout</button></router-link> 
+  </ul>
   </nav> 
   <router-view/>
 
-  <button type="button" class="logout" @click="logout">Logout</button>
+ 
 </template>
 
 
@@ -36,44 +43,44 @@ nav {
     }
   }
 }
+.links{
+list-style-type:none;
+
+}
 </style>
 <script>
 
 import { auth } from '@/firebase';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-
+import { store } from '@/store'
 
 export default {
   data() {
     return {
-      currentUser: null
+      currentUser: null,
+      store,
     };
   },
   created() { 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.currentUser = user; 
-        console.log(user.email + " is logged in");
+        console.log(user.email + " is logged in"); 
+        this.$router.push({ name: 'home' });
       } else {
+        this.currentUser = null;
         console.log("No one is logged in");
+        this.$router.push({ name: 'login' });
       }
     });
   },
-  checkUser(){
-      onAuthStateChanged(auth, (user) => {
-      if (currentUser != null) {
-        this.$router.push({ name: 'home' });
-      } else {
-        this.$router.push({ name: 'login' });
-      }
-    });   // trenutno samo ideja 
-  },
+
   methods:{
   logout(){
       signOut(auth)
         .then(() => {
           console.log("User has been logged out");
-          this.$router.push({name:"login"})
+          this.$router.push({name:'login'})
         })
         .catch((error) => {
           console.error("User is not logged in ", error);

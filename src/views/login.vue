@@ -1,6 +1,7 @@
 <template>
 <div>
-    <h1>This is a login page</h1>
+    <h1>Welcome!</h1>
+    <h2>Login or signup here</h2>
     <div class="container">
       <div class="row">
         <div class="col-sm">
