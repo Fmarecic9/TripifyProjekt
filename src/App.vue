@@ -52,7 +52,7 @@ list-style-type:none;
 
 import { auth } from '@/firebase';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { store } from '@/store'
+import store from '@/store.js'
 
 export default {
   data() {
@@ -64,7 +64,8 @@ export default {
   created() { 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        this.currentUser = user; 
+        this.currentUser = user.email; 
+        store.currentUser = user.email;
         console.log(user.email + " is logged in"); 
         this.$router.push({ name: 'home' });
       } else {
