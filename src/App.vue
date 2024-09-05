@@ -4,8 +4,7 @@
     <li v-if="this.currentUser != null">
     <router-link to="/">Home</router-link> | |
     <router-link to="/create">Create</router-link> | | 
-    <router-link to="/edit">Edit</router-link> | | 
-    <router-link to="/view">View</router-link>  
+    <router-link to="/lists">Lists</router-link>  
     </li>
  
     <li v-if="this.currentUser == null">
@@ -47,6 +46,7 @@ nav {
 list-style-type:none;
 
 }
+
 </style>
 <script>
 

@@ -51,7 +51,7 @@ export default{
 
       })
       .catch((error)=>{
-        console.error("Username or password is inccorect ", error)
+        alert("Username or password is inccorect ", error)
       });
       console.log("Logging in...")
       }

@@ -24,9 +24,9 @@ const routes = [
     component: ()=>import('../views/edit.vue')
   },
   {
-    path: '/view',
-    name: 'view',
-    component:()=>import('../views/view.vue')
+    path: '/lists',
+    name: 'lists',
+    component:()=>import('../views/lists.vue')
   },
   {
     path: '/signup',

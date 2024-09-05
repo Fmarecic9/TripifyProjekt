@@ -1,15 +1,15 @@
 <template>
   <h2>Create your packing list</h2>
-  <div class="create" >
+  <div class="create">
 
   <form @submit.prevent="onSubmit">
       <div class="form-group">
-        <label for="nameList">Name</label>
+        <label for="nameList">List name</label>
             <input type="text" v-model="listName" class="form-control" id="listName" aria-describedby="emailHelp" placeholder="Name of your list">
             </div>
 
         <div class="itemSelection">
-          <h2>Add items</h2>
+          <h3>Add items</h3>
           
             <div class="form-group">
               <label for="itemName">Item Name</label>
@@ -39,7 +39,9 @@
 .create {
   margin: auto;
   width:40%;
-
+  border: 3px solid #000000;
+  border-radius: 15px;
+  background-color: lightgray;
 }
 
 </style>
