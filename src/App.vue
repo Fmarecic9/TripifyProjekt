@@ -93,8 +93,8 @@ background-color: #36454F	 !important;
 }
 
 .logo {
-  font-size: 2rem; /* Adjust the size of your logo */
-  margin-bottom: 20px; /* Add some space between logo and navigation */
+  font-size: 2rem; 
+  margin-bottom: 20px; 
 }
 
 .nav-container {
@@ -110,7 +110,7 @@ background-color: #36454F	 !important;
 }
 
 .nav-link {
-  color: #ffffff; /* Adjust link colors */
+  color: #ffffff; 
   text-decoration: none;
 }
 .nav-link:hover{

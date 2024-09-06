@@ -26,10 +26,11 @@
 
           </tbody>
         </table>
-          <router-link to="/edit"><button type="button" class="btn btn-primary" @click="editList">Edit</button></router-link>
+
       </div>
     </div>
   </div>
+  <span class="edit-button"><router-link to="/edit"><button type="button" class="btn btn-primary" @click="editLists()">Edit your lists here</button></router-link></span>
 </template>
 <style>
 .scrolling{
@@ -39,6 +40,12 @@
 } 
 .view {
   padding: 20px;
+}
+edit-button{
+ display: flex; 
+  flex-wrap: wrap; 
+  gap: 20px; 
+
 }
 
 .lists-container {
@@ -119,19 +126,20 @@ export default {
         console.log(doc.id)
         console.log(doc.data())
         
-        const data = doc.data()    // Spread the document data
+        const data = doc.data()    
         
         this.lists.push({
             id: doc.id,
-            ...data, // Spread operator to include all fields (listName, items, etc.)
+            ...data, 
           });
         });
   
-  }
-},
-  editList() {
+  },
+   editLists() {
       this.$router.push({ name: "edit" }); 
     },
+},
+ 
 }  
       
   

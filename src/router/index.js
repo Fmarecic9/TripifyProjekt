@@ -33,6 +33,12 @@ const routes = [
     name: 'signup',
     component:()=>import('../views/signup.vue')
   },
+  {
+    path: '/itemEdit/:itemName/:quantity/:description',
+    name: 'itemEdit',
+    component:()=>import('../views/itemEdit.vue'),
+    props: true,
+  },
 ]
 
 const router = createRouter({

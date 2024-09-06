@@ -27,7 +27,7 @@
               <td>{{ item.description }}</td>
 
               <td>
-                <button >Edit</button>
+                <button class="edit-Item" @click="editAnItem(item, list.id)">Edit</button>
             
               </td>
             </tr>
@@ -55,8 +55,8 @@
 }
 .table-header{  
   display: flex;
-  justify-content: space-between; /* Distribute items with space between */
-  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; 
+  align-items: center; 
 
 }
 
@@ -72,6 +72,7 @@ export default {
     name: 'editLists',
     data(){
         return{
+          selectedListId: null,
           listName: '',
           lists: [],
         }
@@ -79,7 +80,6 @@ export default {
     mounted(){
     console.log("im tryin bro")
     this.displayLists()
-
   },
   methods: {
   async displayLists(){
@@ -95,14 +95,15 @@ export default {
         console.log(doc.id)
         console.log(doc.data())
         
-        const data = doc.data()    // Spread the document data
+        const data = doc.data()    
         
         this.lists.push({
             id: doc.id,
-            ...data, // Spread operator to include all fields (listName, items, etc.)
+            ...data,
           });
         });
-  
+        
+      
     },
  
     async deleteList(listId) {
@@ -113,7 +114,7 @@ export default {
       await deleteDoc(doc(db, "lists", listId));
     this.lists = this.lists.filter(list => list.id !== listId);
   
-    alert("List deleted successfully!");
+    
   } catch (e) {
     console.error("Error deleting list: ",listId, e);
   }
@@ -125,12 +126,24 @@ export default {
     editBack(){
       this.$router.push({ name: "lists" }); 
     },
+    editAnItem(item, listId){
+      if(listId){
+      store.selectedListId = listId;
+      this.$router.push({name:"itemEdit", 
+      params: {itemName: item.itemName, quantity: item.quantity, description: item.description},  
+      query:{listId:listId} 
+      });
+    }
+    else{
+      console.error("listId is missing!")
+    }
   },
  
   }
-
+}
  
-  
+   
+
   
 
 </script>
