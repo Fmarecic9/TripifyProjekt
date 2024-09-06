@@ -4,12 +4,12 @@
       <div v-if="lists.length === 0">
         <p>No lists found.</p>
       </div>
-      <div v-else class="lists-container">
+      <div v-else class="lists-container" >
       <div v-for="list in lists" :key="list.id" class="list-table">
         <h2>{{ list.listName }} 
           <button type="button" class="btn-close" aria-label="Close" @click="deleteList(list.id)"></button> 
         </h2>
-        <table>
+        <table class="scrolling">
           <thead>
             <tr>
               <th>Item</th>
@@ -18,7 +18,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             <tr v-for="(item) in list.items " :key="item.itemName">
               <td >{{ item.itemName }}</td>
               <td>{{ item.quantity }}</td>
@@ -26,7 +26,7 @@
 
               <td>
                 <button >Edit</button>
-
+            
               </td>
             </tr>
           </tbody>
@@ -35,7 +35,14 @@
       </div>
     </div>
 </template>
+<style>
+.scrolling{
+    display: block;
+  max-height: 300px;  
+  overflow-y: auto; 
+}
 
+</style>
 
 
 <script>
@@ -81,8 +88,10 @@ export default {
     },
  
     async deleteList(listId) {
-      console.log("Deleting list with ID:", listId);
-     try {
+      const userConfirm = confirm("Are sure you want to delete this list?")
+
+    if(userConfirm){
+    try {
       await deleteDoc(doc(db, "lists", listId));
     this.lists = this.lists.filter(list => list.id !== listId);
   
@@ -90,6 +99,10 @@ export default {
   } catch (e) {
     console.error("Error deleting list: ",listId, e);
   }
+    }else{
+      alert("List deletion cancelled");
+
+    }
     }
   }
 }  

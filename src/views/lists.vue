@@ -7,7 +7,7 @@
     <div v-else class="lists-container">
       <div v-for="list in lists" :key="list.id" class="list-table">
         <h2>{{ list.listName }}</h2>
-        <table>
+        <table class="scrolling">
           <thead>
             <tr>
               <th>Item</th>
@@ -30,6 +30,11 @@
   </div>
 </template>
 <style>
+.scrolling{
+    display: block;
+  max-height: 300px;  
+  overflow-y: auto; 
+} 
 .view {
   padding: 20px;
 }

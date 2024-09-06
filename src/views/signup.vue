@@ -20,7 +20,7 @@
               <label for="confirmPasswordField">Confirm Password</label>
               <input type="password" v-model="passwordRepeat" class="form-control" id="confirmPasswordField" placeholder="Confirm password">
             </div>
-            <button type="button" @click='signup' class="btn btn-primary mt-5">Submit</button>
+            <button type="button" @click='signup' class="btn btn-primary mt-5">Sign in</button>
           </form>
         </div>
         <div class="col-sm">
