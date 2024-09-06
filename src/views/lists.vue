@@ -24,8 +24,7 @@
 
           </tbody>
         </table>
-          <router-link to="/edit"><button type="button" class="btn btn-primary">Edit</button></router-link>
-          <button type="button" class="btn btn-danger">Delete</button> 
+          <router-link to="/edit"><button type="button" class="btn btn-primary" @click="editList">Edit</button></router-link>
       </div>
     </div>
   </div>
@@ -84,7 +83,6 @@
 <script>
 import { db } from '@/firebase';
 import { getDocs, collection, query, where} from 'firebase/firestore';
-import { auth } from '@/firebase'
 import store from '@/store'
 
 export default {
@@ -123,7 +121,10 @@ export default {
         });
   
   }
-}
+},
+  editList() {
+      this.$router.push({ name: "edit" }); 
+    },
 }  
       
   
