@@ -1,22 +1,40 @@
 <template>
-  <nav class = "navigacija">
-    <ul class = "links">
-    <li v-if="this.currentUser != null">
-    <router-link to="/">Home</router-link> | |
-    <router-link to="/create">Create</router-link> | | 
-    <router-link to="/lists">Lists</router-link>  
-    </li>
- 
-    <li v-if="this.currentUser == null">
-    <router-link to="/login">Login</router-link> | |
-    <router-link to="/signup">Sign up</router-link>     
-    </li>
-    <router-link to="/login"><button type="button" class="btn btn-secondary btn-sm" @click="logout" v-if="this.currentUser != null">Logout</button></router-link> 
-  </ul>
-  </nav> 
-  <router-view/>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid navbar-container">
+      <a class="navbar-brand logo" >Tripify</a>
 
- 
+      <div v-if="currentUser != null" class="nav-container">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/create" class="nav-link">Create</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/lists" class="nav-link">Lists</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/login">
+              <button type="button" class="btn btn-secondary btn-sm" @click="logout" v-if="currentUser != null">Logout</button>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+
+      <div v-else class="nav-container">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/signup" class="nav-link">Sign up</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-view />
 </template>
 
 
@@ -46,6 +64,63 @@ nav {
 list-style-type:none;
 
 }
+.container-fluid{
+background-color: #36454F	 !important;
+
+}
+
+.navbar bg-body-tertiary{
+background: #36454F	 !important;
+height: 200%;
+}
+
+.navbar-brand{
+color: white;
+}
+.navbar-brand:hover{
+  color:#2dc9a5;
+}
+
+
+.nav nav-tabs{
+background-color: #36454F	 !important;
+
+}
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem; /* Adjust the size of your logo */
+  margin-bottom: 20px; /* Add some space between logo and navigation */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-link {
+  color: #ffffff; /* Adjust link colors */
+  text-decoration: none;
+}
+.nav-link:hover{
+  color:#2dc9a5;
+
+}
+.nav-link:active, .nav-link:focus{
+  color: #2dc9a5
+}
+
 
 </style>
 <script>
@@ -61,6 +136,7 @@ export default {
       store,
     };
   },
+   // 
   created() { 
     onAuthStateChanged(auth, (user) => {
       if (user) {

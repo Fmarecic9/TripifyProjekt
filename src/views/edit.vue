@@ -6,7 +6,9 @@
       </div>
       <div v-else class="lists-container" >
       <div v-for="list in lists" :key="list.id" class="list-table">
-        <h2>{{ list.listName }} 
+         <h2 class="table-header">
+          <router-link to="lists"><button type="button" class="batun" aria-label="Close" @click="editBack()">Back</button> </router-link>
+          <span>{{ list.listName }} </span>
           <button type="button" class="btn-close" aria-label="Close" @click="deleteList(list.id)"></button> 
         </h2>
         <table class="scrolling">
@@ -40,6 +42,22 @@
     display: block;
   max-height: 300px;  
   overflow-y: auto; 
+}
+.batun{
+  font-size: 70%;
+  border-radius: 20px;
+  border: none;
+  color:white;
+  background-color:#2dc9a5;
+}
+.batun:hover{
+  background-color: #1b9f80;
+}
+.table-header{  
+  display: flex;
+  justify-content: space-between; /* Distribute items with space between */
+  align-items: center; /* Align items vertically in the center */
+
 }
 
 </style>
@@ -103,9 +121,14 @@ export default {
       alert("List deletion cancelled");
 
     }
-    }
+    },
+    editBack(){
+      this.$router.push({ name: "lists" }); 
+    },
+  },
+ 
   }
-}  
+
  
   
   
