@@ -7,8 +7,9 @@
     <form @submit.prevent="saveChanges">
         <div class="item-editing">
           <h2 class="table-header">
-            <router-link to="lists"><button type="button" class="cancel-button" aria-label="Close" @click="cancelItemEdit()">Cancel</button> </router-link>
+            <router-link to="edit"><button type="button" class="cancel-button" aria-label="Close" @click="cancelItemEdit()">Cancel</button> </router-link>
           <span> Edit item</span>
+          <button type="button"  class="btn-close" aria-label="Close" @click="deleteItem(itemName)"></button> 
           </h2>
             <div class="form-group">
               <label for="itemName">Item Name</label>
@@ -48,31 +49,34 @@
 
 }
 .cancel-button{
-    background-color: red;
+    background-color: grey;
     font-size: 70%;
+    color: white;
     border-radius: 20px;
     border: none;
-    color:white;
+    background-color:#2dc9a5;
 }
 .cancel-button:hover{
-    background-color: darkred;
+    background-color: #1b9f80;
 }
+
 </style>
 
 
+
 <script>
-import {getDoc, doc, updateDoc} from 'firebase/firestore'
+import {getDoc, doc, updateDoc, deleteField} from 'firebase/firestore'
 import {db} from '@/firebase';
-import store from '@/store'
+
 
 
 export default {
-    props: ['itemName', 'quantity', 'description'] ,
+    props: ['itemName', 'quantity', 'description' ],
     data(){
     return{
         editedItemName: this.itemName,
         editedQuantity: this.quantity,
-        editedDescription: this.description,    
+        editedDescription: this.description ||'',    
         }
     },
    computed: {
@@ -85,10 +89,10 @@ export default {
     try{
         console.log("listid", this.listId)
     if (this.editedQuantity < 1)  { 
-        alert("Item quantity cannot be below 1!")
+        alert("Item quantity cannot be 0!")
         return;
         }
-
+ 
     const listRef = doc(db, 'lists', this.listId);
     const listDoc = await getDoc(listRef);
 
@@ -105,17 +109,42 @@ export default {
             : item
         );
         await updateDoc(listRef, { items: updatedItems });
-
+        this.$router.push({ name: 'edit' });
   
       
         }catch(e){
             console.error('Error updating item...', e)
+            this.$router.push({ name: 'edit' });
         }
-        this.$router.push({ name: 'edit' });
+        
+        
     },
-      
-    
+    async deleteItem(itemName){
+    const userConfirm = confirm("Are sure you want to delete this item?")
+    if (userConfirm){
+    try{
+    const listRef = doc(db, 'lists', this.listId);
+    const listDoc = await getDoc(listRef);
+
+    const listData = listDoc.data();
+
+    const remainingItems = listData.items.filter(item => item.itemName !== itemName);
+
+    await updateDoc(listRef, { items: remainingItems });
+    this.$router.push({ name: 'edit' });
+    }
+    catch(e){
+      console.error("Could not delete item")
+       this.$router.push({ name: 'edit' });
+    }
+    }
+    else{
+      alert("Item delete cancelled")
+    }
+
+    },
     cancelItemEdit(){
+        console.log("Cancelling...")
         this.$router.push({name:'edit'})
     }
 },

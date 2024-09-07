@@ -1,6 +1,20 @@
 <template>
+<h2>Here are your stored lists: </h2>  
+  <div class="buttons-container">
+    <div class="edit-button">
+      <router-link to="/edit">
+        <button type="button" class="btn btn-primary" @click="editLists()">Edit your lists here</button>
+      </router-link>
+    </div>
+    
+    <div class="create-button">
+      <router-link to="/create">
+        <button type="button" class="btn btn-primary">Create a new list +</button>
+      </router-link>
+    </div>
+  </div>
 <br>
-<br>
+
   <div class="lists">
     <div v-if="lists.length === 0">
       <p>No lists found.</p>
@@ -30,7 +44,7 @@
       </div>
     </div>
   </div>
-  <span class="edit-button"><router-link to="/edit"><button type="button" class="btn btn-primary" @click="editLists()">Edit your lists here</button></router-link></span>
+ 
 </template>
 <style>
 .scrolling{
@@ -93,6 +107,16 @@ edit-button{
   overflow-y: auto; 
 
 }
+.buttons-container {
+  place-content: center;
+  display: flex;
+  gap: 20px; 
+  margin-bottom: 20px; 
+}
+
+.edit-button, .create-button {
+  display: inline-block;
+}
 </style>
 <script>
 import { db } from '@/firebase';
@@ -109,7 +133,6 @@ export default {
         }
     },
   mounted(){
-    console.log("im tryin bro")
     this.displayLists()
 
   },
@@ -123,8 +146,7 @@ export default {
       this.lists = [  ];
 
       querySnapshot.forEach(doc => {
-        console.log(doc.id)
-        console.log(doc.data())
+ 
         
         const data = doc.data()    
         

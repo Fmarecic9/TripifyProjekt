@@ -1,5 +1,5 @@
 <template>
-  <h2>Create your packing list</h2>
+  <h2>Create your item list</h2>
   <div class="create">
 
   <form @submit.prevent="onSubmit">
@@ -64,19 +64,20 @@ export default {
   methods: {
 
     addItem(){
-      if (this.newItem.quantity < 1 ) {
-        alert("You can not add less than 1 item")
+      if (this.newItem.quantity < 1 || !this.newItem.itemName || !this.newItem.description || !this.listName) {
+        alert("You can not leave empty fields")
         return
       } 
       this.items.push({ ...this.newItem });
       
       this.newItem.itemName = '';
-      this.newItem.quantity = 1;
+      this.newItem.quantity = 1; 
       this.newItem.description = '';
     },
      async saveList() {
-      if (this.listName === ""){
-        alert("Please insert the list name")
+      if (this.newItem.quantity < 1 || !this.newItem.itemName || !this.newItem.description || !this.listName){
+        alert("You can not leave empty fields")
+        return
       }
       
       try {

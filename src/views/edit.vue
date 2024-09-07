@@ -1,13 +1,20 @@
 <template>
-    <div class="edit">
-        <h1>Edit the lists </h1>
+     <div class="edit">
+    <div class="header-container">
+      <router-link to="lists">
+        <button type="button" class="batun" aria-label="Close" @click="editBack()">Back</button>
+      </router-link>
+      <h1>Edit the lists</h1>
+    </div>
+     
       <div v-if="lists.length === 0">
         <p>No lists found.</p>
       </div>
+      
       <div v-else class="lists-container" >
       <div v-for="list in lists" :key="list.id" class="list-table">
          <h2 class="table-header">
-          <router-link to="lists"><button type="button" class="batun" aria-label="Close" @click="editBack()">Back</button> </router-link>
+          
           <span>{{ list.listName }} </span>
           <button type="button" class="btn-close" aria-label="Close" @click="deleteList(list.id)"></button> 
         </h2>
@@ -44,8 +51,8 @@
   overflow-y: auto; 
 }
 .batun{
-  font-size: 70%;
-  border-radius: 20px;
+  font-size: 150%;
+  border-radius: 12px;
   border: none;
   color:white;
   background-color:#2dc9a5;
@@ -59,6 +66,26 @@
   align-items: center; 
 
 }
+.edit-Item{
+  font-size: 100%;
+  border-radius: 20px;
+  border: none;
+  color:white;
+  background-color: black;
+
+}
+.header-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 20px; 
+}
+.header-container h1 {
+  margin: 0 auto; 
+  text-align: center;
+  flex-grow: 1; 
+}
+
 
 </style>
 
@@ -78,7 +105,6 @@ export default {
         }
     },
     mounted(){
-    console.log("im tryin bro")
     this.displayLists()
   },
   methods: {
@@ -92,8 +118,6 @@ export default {
       this.lists = [  ];
 
       querySnapshot.forEach(doc => {
-        console.log(doc.id)
-        console.log(doc.data())
         
         const data = doc.data()    
         

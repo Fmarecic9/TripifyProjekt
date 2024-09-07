@@ -5,11 +5,11 @@
 
       <div v-if="currentUser != null" class="nav-container">
         <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">Home</router-link>
+             <li class="nav-item">
+            <router-link to="/trips" class="nav-link">Trips</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/create" class="nav-link">Create</router-link>
+            <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/lists" class="nav-link">Lists</router-link>
@@ -120,7 +120,10 @@ background-color: #36454F	 !important;
 .nav-link:active, .nav-link:focus{
   color: #2dc9a5
 }
-
+button.btn.btn-secondary.btn-sm {
+  margin-left: auto; 
+  background-color: #2dc9a5;;
+}
 
 </style>
 <script>

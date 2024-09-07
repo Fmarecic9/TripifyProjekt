@@ -39,6 +39,12 @@ const routes = [
     component:()=>import('../views/itemEdit.vue'),
     props: true,
   },
+  {
+    path: '/trips',
+    name: 'trips',
+    component: ()=>import('../views/trips.vue')
+    
+  }
 ]
 
 const router = createRouter({
