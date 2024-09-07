@@ -44,6 +44,11 @@ const routes = [
     name: 'trips',
     component: ()=>import('../views/trips.vue')
     
+  },
+  {
+    path:'/getWeather',
+    name: 'getWeather',
+    component: ()=>import('../views/weatherFetch.vue')
   }
 ]
 

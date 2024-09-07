@@ -6,7 +6,7 @@
       <div v-if="currentUser != null" class="nav-container">
         <ul class="nav nav-tabs">
              <li class="nav-item">
-            <router-link to="/trips" class="nav-link">Trips</router-link>
+            <router-link to="/getWeather" class="nav-link">WeatherTest</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/" class="nav-link">Home</router-link>

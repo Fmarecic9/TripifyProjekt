@@ -2,6 +2,7 @@
   <h2>Create your item list</h2>
   <div class="create">
 
+
   <form @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="nameList">List name</label>
@@ -75,7 +76,7 @@ export default {
       this.newItem.description = '';
     },
      async saveList() {
-      if (this.newItem.quantity < 1 || !this.newItem.itemName || !this.newItem.description || !this.listName){
+      if (this.newItem.quantity < 1 || !this.listName){
         alert("You can not leave empty fields")
         return
       }
@@ -89,6 +90,7 @@ export default {
         }); 
         this.listName = '';
         this.items = [];
+        this.$router.push({name:'lists'})
       } catch (e) {
         console.error("Could not add doc to database ", e);
       }
