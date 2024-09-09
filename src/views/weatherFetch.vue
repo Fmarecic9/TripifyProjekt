@@ -1,27 +1,96 @@
 <template>
   <div>
     <div class="header-container">
-    <router-link to="/"><button type="button" class="back-button" aria-label="Close">Back</button> </router-link>
+    <router-link to="/"><button type="button" class="back-button" aria-label="back">Back</button> </router-link>
 
   </div>
       
-
-    <form @submit.prevent="fetchWeather">
-      <input v-model="city" placeholder="Choose your destination" />
+    <form @submit.prevent="getForecast">
+      <div class = "weather-inputs">
+        <input v-model="city" placeholder="Choose your destination" />
       <button type="submit" >Get Weather</button>
+      </div>
       <br>
     </form>
-   
-    <div v-if="weather">
-      <h2>Weather in {{ weather.name }}, {{weather.sys.country}}</h2>
-      <p>Temperature: {{ weather.main.temp }}°C</p>
-      <p>Condition: {{ weather.weather[0].description }}</p>
-   
+   <div class="weather-info">
+    <div v-if="weather" class="weather-current">
+      <table class="current-w">
+        <thead>
+        <th><h2>Current weather: {{ weather.name }}, {{weather.sys.country}}</h2></th>
+        </thead>
+        <tbody>
+        <tr>  
+        <td><p>Temperature: {{ weather.main.temp }}°C</p>
+        <p>Condition: {{ weather.weather[0].description }}</p></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-  <button @click="confirmWeather()">Confirm</button>
-   
+  <div class="forecast-bottom">
+      <h2>5-day forecast</h2>
+    <div v-if="forecast" class="forecast-table">
+    <table class="weather-5-days">
+        <thead>
+          <th><h2>5-day forecast: {{ forecast.city.name }}, {{forecast.city.country}}</h2></th>
+        </thead>
+        <tbody>
+          <tr v-for="(entry,index) in forecast.list" :key="index">  
+          <td><p>Date: {{ formatDateTime(entry.dt_txt).date }}°C</p>
+          <p>Time: {{ formatDateTime(entry.dt_txt).time }}</p></td>
+          <td>{{ entry.main.temp }}°C</td>
+          <td>{{ entry.weather[0].description }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+
+   </div>
+  <button @click="confirmForecast()">Confirm</button>
+</div>
 </template>
+
+
+<script>
+import { getWeather, getFiveDayForecast } from '@/openWeather';
+
+export default {
+  data() {
+    return {
+      city: '',
+      weather: null,
+      forecast: null,
+    };
+  },
+  methods: {
+
+     async getForecast(){  
+        try{
+          console.log(this.forecast)
+          this.forecast = await getFiveDayForecast(this.city)
+          this.weather = await getWeather(this.city);
+        }
+        catch(e){
+          console.error("Could not obtain forecast")
+        }
+ },
+    confirmForecast() {
+      this.$emit('forecastInfo', this.forecast);
+ 
+    },
+    formatDateTime(dt_txt) {
+      const [date, time] = dt_txt.split(' ');
+      return { date, time };
+  },
+
+    }
+}
+
+
+</script>
+
+
 <style>
 .header-container {
   display: flex;
@@ -34,35 +103,67 @@
   text-align: center;
   flex-grow: 1; 
 }
+.weather-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; 
+}
 
+.weather-inputs input {
+  width: 50%; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-</style>
+.weather-inputs button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #2dc9a5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-<script>
-import { getWeather } from '@/openWeather';
+.weather-inputs button:hover {
+  background-color: #28b18e;
+}
+.weather-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 70px; 
+}
+.weather-5-days {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-export default {
-  data() {
-    return {
-      city: '',
-      weather: null,
-    };
-  },
-  methods: {
-    async fetchWeather() {
-      try {
-        this.weather = await getWeather(this.city);
-      } catch (e) {
-            console.error("Could not fetch weather", e)
-      } 
-    },
+.weather-5-days th, .weather-5-days td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+}
 
-    confirmWeather(t) {
-      this.$emit('weatherSelected', this.weather);
-    },
+.weather-5-days thead {
+  background-color: #f4f4f4;
+}
 
-    }
+.weather-5-days tbody {
+  display: table;
+  width: 100%;
+}
+
+.weather-5-days td {
+  vertical-align: top;
+}
+
+.weather-5-days .forecast-entry {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem;
 }
 
 
-</script>
+</style>

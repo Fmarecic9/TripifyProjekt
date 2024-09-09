@@ -14,15 +14,14 @@
           <table class="scrolling">
             <thead>
               <tr>
-                <th>Weather Info</th>
+                <th>Trip created</th>
                 <th>Item list</th>
               </tr>
             </thead>
             <tbody class="trips-container">
               <tr>
                 <td>
-                  <p>{{ trip.temperature}}°C</p>
-                  <p>{{ trip.weatherCondition }}</p>
+                  <p>{{ formatDate(trip.timestamp) }}</p>
                 </td>
                 <td>
                   <ul class="list-items">
@@ -41,7 +40,7 @@
 </template>
 <script>
 import { db } from '@/firebase'
-import { collection, query, where, getDocs} from 'firebase/firestore'
+import { collection, query, where, getDocs, Timestamp} from 'firebase/firestore'
 import store from '@/store'
 
 export default {
@@ -66,24 +65,31 @@ export default {
       const querySnapshot = await getDocs(q)
       
       this.trips = [  ];
-
+      
+      
       querySnapshot.forEach(doc => {
         const data = doc.data()    
-        
+        const timestamp = data.timestamp?.toDate();
         this.trips.push({
           id: doc.id,
           destination: data.destination,
           country: data.country,
-          temperature: data.temperature,
-          weatherCondition: data.weatherCondition,
-          selectedList: data.selectedList
+          selectedList: data.selectedList,
+          timestamp: timestamp
           });
         })
      }catch(e){
       console.error("error fetching trips ", e)
      }
 
-  }
+  },
+  formatDate(date) {
+      if (!date) return '';
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); 
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
+    },
 }
 }
 </script>

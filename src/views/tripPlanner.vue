@@ -2,15 +2,17 @@
   <div class="trip-planner">
     <div class="top-section">
         <h2>What city do you plan on visiting?</h2>
-      <weather-fetch @weatherSelected="setWeatherDetails" />
+      <weather-fetch @forecastInfo="setForecastDetails" />
     </div>
     <div class="bottom-section">
+        <h2>Availible lists</h2>
       <list-pick @selectedList="setSelectedList" />
     </div>
     <button type="button" class="create-trip-button" @click="createTrip">
       Create Trip
     </button>
   </div>
+  
 </template>
 
 <script>
@@ -18,6 +20,7 @@ import weatherFetch from './weatherFetch.vue';
 import listPick from './listPick.vue';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase"; 
+
 
 export default {
   components: {
@@ -28,28 +31,28 @@ export default {
     return {
       weatherDetails: null,
       selectedList: null,
+      forecastInfo : null,
     };
   },
   methods: {
     setWeatherDetails(weather) {
       this.weatherDetails = weather;
-      
     },
     setSelectedList(list) {
       this.selectedList = list;
     },
+    setForecastDetails(forecast) {
+      this.forecastInfo = forecast;
+    },
     async createTrip() {
-      if (!this.weatherDetails || !this.selectedList) {
+      if (!this.forecastInfo || !this.selectedList) {
         alert("Please select both weather details and a list.");
         return;
       }
-
       try {
         await addDoc(collection(db, "trips"), {
-          destination: this.weatherDetails.name,
-          country: this.weatherDetails.sys.country,
-          temperature: this.weatherDetails.main.temp,
-          weatherCondition: this.weatherDetails.weather[0].description,
+          destination: this.forecastInfo.city.name,
+          country: this.forecastInfo.city.country,
           selectedList: this.selectedList,
           timestamp: new Date(),
         });
@@ -61,6 +64,7 @@ export default {
     },
   },
 };
+
 </script>
 
 

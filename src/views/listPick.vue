@@ -4,6 +4,7 @@
     <div v-if="lists.length === 0">
       <p>No lists found.</p>
     </div>
+    
     <div v-else class="lists-container">
       <div v-for="list in lists" :key="list.id" class="list-table">
         <h2 class="table-header">
@@ -139,7 +140,8 @@ export default {
 }
 .table-header{
   display: flex;
-  align-items: center; 
+  align-items: center;
+  gap: 15px; 
 
 }
 .back-button{
