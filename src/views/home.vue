@@ -22,7 +22,7 @@
             <tbody class="trip-stuff">
               <tr>
                 <td>
-                  <p>startDate-endDate</p>
+                  {{trip.tripStart}}-{{trip.tripEnd}}
                 </td>
               </tr>
     
@@ -80,7 +80,9 @@ export default {
           destination: data.destination,
           country: data.country,
           selectedList: data.selectedList,
-          timestamp: timestamp
+          timestamp: timestamp,
+          tripStart: data.tripStart,
+          tripEnd: data.tripEnd,
           });
         })
      }catch(e){

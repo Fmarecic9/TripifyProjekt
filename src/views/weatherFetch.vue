@@ -2,12 +2,11 @@
   <div>
     <div class="header-container">
     <router-link to="/"><button type="button" class="back-button" aria-label="back">Back</button> </router-link>
-    <h2>Where and when are you travelling?</h2>
+    <h2>Where are you travelling?</h2>
   </div>
-  
-    
     <form @submit.prevent="getForecast">
       <div class = "weather-inputs">
+
         <input v-model="city" placeholder="Choose your destination" />
       <button type="submit" >Get Weather</button>
       </div>
@@ -59,6 +58,7 @@
 <script>
 import { getWeather, getFiveDayForecast } from '@/openWeather';
 
+
 export default {
   data() {
     return {
@@ -66,6 +66,7 @@ export default {
       weather: null,
       forecast: null,
       isExpanded: false,
+   
     };
   },
   methods: {
