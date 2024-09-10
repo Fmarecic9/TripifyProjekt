@@ -44,50 +44,6 @@
       </div>
     </div>
 </template>
-<style>
-.scrolling{
-    display: block;
-  max-height: 300px;  
-  overflow-y: auto; 
-}
-.batun{
-  font-size: 150%;
-  border-radius: 12px;
-  border: none;
-  color:white;
-  background-color:#2dc9a5;
-}
-.batun:hover{
-  background-color: #1b9f80;
-}
-.table-header{  
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-
-}
-.edit-Item{
-  font-size: 100%;
-  border-radius: 20px;
-  border: none;
-  color:white;
-  background-color: black;
-
-}
-.header-container {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 10px 20px; 
-}
-.header-container h1 {
-  margin: 0 auto; 
-  text-align: center;
-  flex-grow: 1; 
-}
-
-
-</style>
 
 
 <script>
@@ -171,3 +127,48 @@ export default {
   
 
 </script>
+<style>
+.scrolling{
+    display: block;
+  max-height: 300px;  
+  overflow-y: auto; 
+}
+.batun{
+  font-size: 150%;
+  border-radius: 12px;
+  border: none;
+  color:white;
+  background-color:#2dc9a5;
+  
+}
+.batun:hover{
+  background-color: #1b9f80;
+}
+.table-header{  
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+
+}
+.edit-Item{
+  font-size: 100%;
+  border-radius: 20px;
+  border: none;
+  color:white;
+  background-color: black;
+
+}
+.header-container {
+  display: flex;
+  justify-content: absolute; 
+  align-items: center; 
+  padding: 10px 20px; 
+}
+.header-container h1 {
+  margin: 0 auto; 
+  text-align: center;
+  flex-grow: 1; 
+}
+
+
+</style>

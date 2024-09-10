@@ -8,30 +8,35 @@
       </div>
 
       <div v-else class="trip-location">
-        <h3>Here are your current trips</h3>
+        <h3>Here are your current trips</h3>  <button type="button" @click="tripEdit" class="btn btn-primary" >Edit your trips</button>
         <div v-for="trip in trips" :key="trip.id" class="trip-table">
-          <h2>Trip to: {{ trip.destination }}, {{ trip.country }}</h2>
           <table class="scrolling">
+            <h2>Trip to: {{ trip.destination }}, {{ trip.country }}</h2>
             <thead>
               <tr>
-                <th>Trip created</th>
-                <th>Item list</th>
+                <th>Start date/end date</th>
+                <th>Item list: "{{trip.selectedList.listName}}"</th>
               </tr>
             </thead>
-            <tbody class="trips-container">
+            <div class="table-bodies">
+            <tbody class="trip-stuff">
               <tr>
                 <td>
-                  <p>{{ formatDate(trip.timestamp) }}</p>
-                </td>
-                <td>
-                  <ul class="list-items">
-                    <li v-for="item in trip.selectedList.items" :key="item.itemName">
-                      {{ item.itemName }} - {{ item.quantity }} - {{item.description}}
-                    </li>
-                  </ul>
+                  <p>startDate-endDate</p>
                 </td>
               </tr>
+    
+               
+                  
+                  <ul class="list-items">
+                    <li v-for="item in trip.selectedList.items" :key="item.itemName">
+                       {{ item.itemName }} - {{ item.quantity }} - {{item.description}} 
+                    </li>
+                  </ul>
+             
+             
             </tbody>
+            </div>
           </table>
         </div>
       </div>
@@ -40,7 +45,7 @@
 </template>
 <script>
 import { db } from '@/firebase'
-import { collection, query, where, getDocs, Timestamp} from 'firebase/firestore'
+import { collection, query, where, getDocs} from 'firebase/firestore'
 import store from '@/store'
 
 export default {
@@ -90,61 +95,41 @@ export default {
       const year = date.getFullYear();
       return `${day}-${month}-${year}`;
     },
+    tripEdit(){
+      this.$router.push({ name: 'tripEdit'})
+    }
 }
 }
-</script>
+</script >
+.trips{
+  items-align
 
-<style>
-
-.list-items {
-  list-style: none;
-  padding-left: 0; 
-  text-align: center; 
 }
 
-.trip-location {
-  width: 80%; 
-  margin: 0 auto; 
-  text-align: center; 
-}
-
-.trips-container {
-  display: flex;
-  flex-direction: column; 
-  gap: 20px;
-  align-items: center; 
-  justify-content: center; 
-}
-
-.trip-table {
+<style scoped>
+.scrolling{
+  display: block;
+  max-height: 200px;  
+  overflow-y: auto; 
   border: 3px solid #000000;
   background-color: lightgray;
-  border-radius: 15px;
+  border-radius:15px;
   padding: 10px;
-  width: 200%; 
-  max-width: 600px; 
-  max-height: 400px;
-  overflow: hidden;
-  margin: 20px auto; 
+  width: 50%; 
+ 
+} 
+.trip-stuff {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 20px; 
+  background-color:white;
+  max-height: 100px; 
+  overflow-y: auto; 
 }
-
-.trip-table h2 {
-  text-align: center;
-}
-
-.table-container {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.trips-container {
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
-  border-collapse: collapse;
-  border: 2px solid #000000;
-  width: 100%;
-  margin: 0 auto;
+.list-items{
+  list-style: none;
+  text-align: right;
+  right: 0;
 }
 
 </style>

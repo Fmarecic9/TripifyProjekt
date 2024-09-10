@@ -1,8 +1,7 @@
 <template>
   <div class="trip-planner">
     <div class="top-section">
-        <h2>What city do you plan on visiting?</h2>
-      <weather-fetch @forecastInfo="setForecastDetails" />
+      <weather-fetch @forecastInfo="setForecastDetails"/>
     </div>
     <div class="bottom-section">
         <h2>Availible lists</h2>
@@ -29,15 +28,11 @@ export default {
   },
   data() {
     return {
-      weatherDetails: null,
       selectedList: null,
       forecastInfo : null,
     };
   },
   methods: {
-    setWeatherDetails(weather) {
-      this.weatherDetails = weather;
-    },
     setSelectedList(list) {
       this.selectedList = list;
     },
@@ -45,8 +40,8 @@ export default {
       this.forecastInfo = forecast;
     },
     async createTrip() {
-      if (!this.forecastInfo || !this.selectedList) {
-        alert("Please select both weather details and a list.");
+      if (!this.forecastInfo || !this.selectedList ) {
+        alert("The forecast or list are missisng.");
         return;
       }
       try {
@@ -55,8 +50,10 @@ export default {
           country: this.forecastInfo.city.country,
           selectedList: this.selectedList,
           timestamp: new Date(),
+
         });
         alert("Trip created successfully!");
+        this.$router.push({name: "home"})
       } catch (e) {
         console.error("Error creating trip: ", e);
         alert("Error creating trip.");

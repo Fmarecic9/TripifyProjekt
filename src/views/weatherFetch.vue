@@ -2,16 +2,17 @@
   <div>
     <div class="header-container">
     <router-link to="/"><button type="button" class="back-button" aria-label="back">Back</button> </router-link>
-
+    <h2>Where and when are you travelling?</h2>
   </div>
-      
+  
+    
     <form @submit.prevent="getForecast">
       <div class = "weather-inputs">
         <input v-model="city" placeholder="Choose your destination" />
       <button type="submit" >Get Weather</button>
       </div>
-      <br>
     </form>
+
    <div class="weather-info">
     <div v-if="weather" class="weather-current">
       <table class="current-w">
@@ -27,7 +28,10 @@
       </table>
     </div>
   <div class="forecast-bottom">
-      <h2>5-day forecast</h2>
+     <button @click="isExpanded = !isExpanded">
+          {{ isExpanded ? 'Hide Forecast' : 'Show Forecast' }} 
+        </button>
+    <div v-if="isExpanded" class="forecast-table">
     <div v-if="forecast" class="forecast-table">
     <table class="weather-5-days">
         <thead>
@@ -44,7 +48,7 @@
       </table>
     </div>
     </div>
-
+  </div>
 
    </div>
   <button @click="confirmForecast()">Confirm</button>
@@ -61,6 +65,7 @@ export default {
       city: '',
       weather: null,
       forecast: null,
+      isExpanded: false,
     };
   },
   methods: {
@@ -77,7 +82,6 @@ export default {
  },
     confirmForecast() {
       this.$emit('forecastInfo', this.forecast);
- 
     },
     formatDateTime(dt_txt) {
       const [date, time] = dt_txt.split(' ');
@@ -104,11 +108,12 @@ export default {
   flex-grow: 1; 
 }
 .weather-inputs {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   align-items: center;
   gap: 15px; 
 }
+
 
 .weather-inputs input {
   width: 50%; 
@@ -130,6 +135,7 @@ export default {
 .weather-inputs button:hover {
   background-color: #28b18e;
 }
+
 .weather-info{
   display: flex;
   flex-direction: column;
@@ -164,6 +170,22 @@ export default {
   border-bottom: 1px solid #eee;
   padding: 0.5rem;
 }
+.forecast-table {
+  margin-top: 20px;
+}
 
+button {
+  margin: 10px 0;
+  padding: 5px 15px;
+  background-color: #2dc9a5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #26b28c;
+}
 
 </style>

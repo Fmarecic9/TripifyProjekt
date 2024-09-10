@@ -60,8 +60,14 @@ const routes = [
     path:'/tripPlanner',
     name:'tripPlanner',
     component:()=>import('../views/tripPlanner.vue')
-  }
+  },
+  {
+    path:'/tripEdit',
+    name: 'tripEdit',
+    component:()=>import('../views/tripEdit.vue')
+  },
 ]
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

@@ -1,5 +1,10 @@
 <template>
-  <h2>Create your item list</h2>
+    <div class="header-container">
+      <router-link to="lists">
+        <button type="button" class="batun" aria-label="Close" @click="createBack()">Back</button>
+      </router-link>
+      <h2>Create your item list</h2>
+    </div>
   <div class="create">
 
 
@@ -36,16 +41,7 @@
           </form>
   </div>
 </template>
-<style>
-.create {
-  margin: auto;
-  width:40%;
-  border: 3px solid #000000;
-  border-radius: 15px;
-  background-color: lightgray;
-}
 
-</style>
 
 <script>
 import { db } from '@/firebase'
@@ -94,10 +90,47 @@ export default {
       } catch (e) {
         console.error("Could not add doc to database ", e);
       }
-    }
+    },
+    createBack(){
+      this.$router.push({ name: "lists" }); 
+    },
     }
 }
 
 
 
 </script>
+<style>
+.create {
+  margin: auto;
+  width:40%;
+  border: 3px solid #000000;
+  border-radius: 15px;
+  background-color: lightgray;
+}
+.header-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding: 10px 20px; 
+} 
+.header-container h2 {
+  margin: 0 auto; 
+  text-align: center;
+  flex-grow: 1; 
+}
+.header-container batun {
+  position: absolute;
+  left: 0;
+}
+.batun{
+  font-size: 150%;
+  border-radius: 12px;
+  border: none;
+  color:white;
+  background-color:#2dc9a5;
+}
+.batun:hover{
+  background-color: #1b9f80;
+}
+</style>
