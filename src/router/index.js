@@ -66,6 +66,12 @@ const routes = [
     name: 'tripEdit',
     component:()=>import('../views/tripEdit.vue')
   },
+  {
+    path:'/tripEditEntry/:itemName/:quantity/:description',
+    name: 'tripEditEntry',
+    component: ()=>import('../views/tripEditEntry.vue'),
+    props: true,
+  },
 ]
 
 

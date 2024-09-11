@@ -9,6 +9,8 @@
 
       <div v-else class="trip-location">
         <h3>Here are your current trips</h3>  <button type="button" @click="tripEdit" class="btn btn-primary" >Edit your trips</button>
+        <br>
+        <br>
         <div v-for="trip in trips" :key="trip.id" class="trip-table">
           <table class="scrolling">
             <h2>Trip to: {{ trip.destination }}, {{ trip.country }}</h2>

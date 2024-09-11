@@ -4,7 +4,7 @@
       <router-link to="lists">
         <button type="button" class="batun" aria-label="Close" @click="editBack()">Back</button>
       </router-link>
-      <h1>Edit the lists</h1>
+      <h2>Edit the lists</h2>
     </div>
      
       <div v-if="lists.length === 0">
@@ -108,7 +108,7 @@ export default {
     },
     editAnItem(item, listId){
       if(listId){
-      store.selectedListId = listId;
+      
       this.$router.push({name:"itemEdit", 
       params: {itemName: item.itemName, quantity: item.quantity, description: item.description},  
       query:{listId:listId} 
@@ -164,7 +164,7 @@ export default {
   align-items: center; 
   padding: 10px 20px; 
 }
-.header-container h1 {
+.header-container h2 {
   margin: 0 auto; 
   text-align: center;
   flex-grow: 1; 

@@ -1,6 +1,6 @@
 <template>
     <div class="itemEdit">
-        <h1>BLANK FOR NOW</h1>
+        <h1>Editing item</h1>
     </div>
   <div>
     
@@ -33,34 +33,7 @@
   </div>
 
 </template>
-<style>
-.item-editing {
-  margin: auto;
-  width:40%;
-  border: 3px solid #000000;
-  border-radius: 15px;
-  background-color: lightgray;
-}
-.table-header{
-  display: flex;
-  
-  align-items: center; 
 
-
-}
-.cancel-button{
-    background-color: grey;
-    font-size: 70%;
-    color: white;
-    border-radius: 20px;
-    border: none;
-    background-color:#2dc9a5;
-}
-.cancel-button:hover{
-    background-color: #1b9f80;
-}
-
-</style>
 
 
 
@@ -150,12 +123,32 @@ export default {
 },
 };
 
- 
-
-
-
-
-
-
-
 </script>
+<style>
+.item-editing {
+  margin: auto;
+  width:40%;
+  border: 3px solid #000000;
+  border-radius: 15px;
+  background-color: lightgray;
+}
+.table-header{
+  display: flex;
+  
+  align-items: center; 
+
+
+}
+.cancel-button{
+    background-color: grey;
+    font-size: 70%;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    background-color:#2dc9a5;
+}
+.cancel-button:hover{
+    background-color: #1b9f80;
+}
+
+</style>

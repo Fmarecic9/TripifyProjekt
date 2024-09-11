@@ -26,7 +26,7 @@
             <tbody class="trip-stuff">
               <tr>
                 <td>
-                  {{trip.tripStart}}-{{trip.tripEnd}} <button class="edit-trip-entry">Edit</button>
+                  {{trip.tripStart}}-{{trip.tripEnd}} <button class="edit-date-button">Edit</button>
                 </td>
               </tr>
     
@@ -34,7 +34,7 @@
                   
                   <ul class="list-items">
                     <li v-for="item in trip.selectedList.items" :key="item.itemName">
-                       {{ item.itemName }} - {{ item.quantity }} - {{item.description}}   <button class="edit-trip-entry">Edit</button>
+                       {{ item.itemName }} - {{ item.quantity }} - {{item.description}}   <button class="edit-trip-entry" @click="editEntry(item, trip.selectedList.id, trip.id)">Edit</button>
                     </li>
 
                   </ul>
@@ -95,9 +95,17 @@ export default {
         }
 
     },
-    editEntry(){
+    editEntry(entry, tripListId, tripId){
+      if(tripListId){
+      this.$router.push({name:"tripEditEntry" ,
+      params: {itemName: entry.itemName, quantity: entry.quantity, description: entry.description},  
+      query:{listId: tripListId, tripId: tripId}
+      })
+      
+      }
+      else {
 
-
+      }
     },
     async deleteTrip(tripId){
     const userConfirm = confirm("Are sure you want to delete this trip?")
@@ -173,6 +181,14 @@ export default {
   border: none;
   color:white;
   background-color: black;
+}
+.edit-date-button{
+ font-size: 100%;
+  border-radius: 20px;
+  border: none;
+  color:white;
+  background-color: black;
+
 }
 
 

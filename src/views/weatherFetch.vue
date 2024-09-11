@@ -103,7 +103,7 @@ export default {
   align-items: center; 
   padding: 10px 20px; 
 }
-.header-container h1 {
+.header-container h2 {
   margin: 0 auto; 
   text-align: center;
   flex-grow: 1; 

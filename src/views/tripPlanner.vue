@@ -1,7 +1,4 @@
 <template>
-
-  
-  
   <div class="trip-planner">
     <div class="top-section">
       <weather-fetch @forecastInfo="setForecastDetails"/>
