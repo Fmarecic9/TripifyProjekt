@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       listName: '',
-      newItem: {itemName: '', quantity: 1, description: ''},
+      newItem: {itemName: '', quantity: 1, description: '', itemPacked: false},
       items: []
       
     }
@@ -70,6 +70,7 @@ export default {
       this.newItem.itemName = '';
       this.newItem.quantity = 1; 
       this.newItem.description = '';
+      this.newItem.itemPacked = false;
     },
      async saveList() {
       if (this.newItem.quantity < 1 || !this.listName){

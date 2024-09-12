@@ -8,8 +8,16 @@
     <div class="date-inputs">
         <h2>When are you going to travel</h2>
         <form @submit.prevent="onSubmit">
-          <input v-model="startDate" placeholder="Start date" />
-          <input v-model="endDate" placeholder="End date" />
+          <input
+            v-model="startDate"
+            placeholder="Start date (dd-mm-yyyy)"
+            @blur="validateDate('startDate')"
+          />
+          <input
+            v-model="endDate"
+            placeholder="End date (dd-mm-yyyy)"
+            @blur="validateDate('endDate')"
+          />
           <button type="submit" >Ok</button>
         </form>
     </div>
@@ -47,6 +55,34 @@ export default {
     };
   },
   methods: {
+      onSubmit() {
+      const validStartDate = this.convertToDateObject(this.startDate);
+      const validEndDate = this.convertToDateObject(this.endDate);
+
+      if (validStartDate && validEndDate) {
+        console.log("Dates are valid:", validStartDate, validEndDate);
+      } else {
+        alert('Please enter dates in the correct format (dd-mm-yyyy).');
+      }
+    },
+    validateDate(dateField) {
+      const dateValue = this[dateField];
+      const isValid = this.isValidDate(dateValue);
+      if (!isValid) {
+        alert('Please enter the date in the correct format (dd-mm-yyyy).');
+      }
+    },
+    isValidDate(dateStr) {
+      const regex = /^\d{2}-\d{2}-\d{4}$/;
+      return regex.test(dateStr);
+    },
+    convertToDateObject(dateStr) {
+      if (!this.isValidDate(dateStr)) return null;
+
+      const [day, month, year] = dateStr.split('-');
+     
+      return new Date(year, month - 1, day);
+    },
     setSelectedList(list) {
       this.selectedList = list;
     },

@@ -129,7 +129,7 @@ export default {
 </script>
 <style>
 .scrolling{
-    display: block;
+  display: block;
   max-height: 300px;  
   overflow-y: auto; 
 }

@@ -75,7 +75,7 @@ export default {
         alert("Item deletion cancelled");
     }
     },
-    // -------------------------------------------------------------------------------------------
+
 
 
     async saveChanges(){
@@ -123,9 +123,8 @@ export default {
 }
 .table-header{
   display: flex;
-  
   align-items: center; 
-
+  
 
 }
 .cancel-trip-edit{
