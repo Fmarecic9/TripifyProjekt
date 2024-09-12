@@ -85,7 +85,7 @@ export default {
           selectedList: data.selectedList,
           timestamp: timestamp,
           tripStart: data.tripStart,
-          tripEnd: data.tripStart,
+          tripEnd: data.tripEnd,
           });
         })
         

@@ -122,14 +122,16 @@ export default {
     },
 }
 </script>
+<style scoped>
 
 
-
-<style>
-.tripEdit{
+.tripEdit {
   width: 100%;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -138,10 +140,11 @@ export default {
   gap: 20px;
 }
 
-.title-container h2 {
-  margin: 0;
-  text-align: center;
-  flex-grow: 1;
+.trips-editing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .header-container {
@@ -149,80 +152,77 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-}
-.scrolling{
-  display: block;
-  max-height: 300px;  
-  overflow-y: auto; 
-  border: 3px solid #000000;
-  background-color: lightgray;
-  border-radius:15px;
-  padding: 10px;
-  width: 650px; 
-  table-layout: fixed;
-}
- th,td{
-  padding: 10px; 
-  width: 50%;
-}
-th {
-  padding: 0 20px; 
-  text-align: left; 
-}
-th:first-child {
-  text-align: left;
-}
-th:last-child {
-  text-align: right;
-}
-th:last-child, td:last-child {
-  text-align: right; 
-}
-
-.trips {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-}
-.trip-table {
-  margin-bottom: 30px;
   width: 100%;
 }
 
-.trip-stuff {
- display: flex; 
-  flex-wrap: wrap; 
-  gap: 20px; 
-  background-color:white;
-  max-height: 100px; 
-  overflow-y: auto; 
-  border: 2px, black;
-  
+.scrolling {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 3px solid #000000;
+  background-color: lightgray;
+  border-radius: 15px;
+  padding: 10px;
+  width: 650px; 
+  margin: 0 auto; /* Center the table horizontally */
+  table-layout: fixed;
 }
-.list-items{
+
+th, td {
+  padding: 10px;
+  width: 50%;
+  text-align: left;
+}
+
+th:first-child {
+  text-align: left;
+}
+
+th:last-child, td:last-child {
+  text-align: right;
+}
+
+.trip-table {
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the table container */
+}
+
+.trip-stuff {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: white;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.list-items {
   list-style: none;
   text-align: right;
 }
-.edit-trip-entry{
+
+.edit-trip-entry {
   font-size: 100%;
   border-radius: 20px;
   border: none;
-  color:white;
+  color: white;
   background-color: black;
-  
-}
-.batun{
-    background-color: grey;
-    font-size: 150%;
-    color: white;
-    border-radius: 20px;
-    border: none;
-    background-color:#2dc9a5;
-}
-.cancel-trip-edit:hover{
-    background-color: #1b9f80;
 }
 
+.batun {
+  background-color: grey;
+  font-size: 150%;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  background-color: #2dc9a5;
+}
+
+.batun:hover {
+  background-color: #1b9f80;
+}
 
 
 </style>
