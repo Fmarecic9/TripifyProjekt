@@ -8,7 +8,7 @@ Aplikacija za organizaciju stvari pri odlasku na putovanje.
 - Editiranje pojedinih predmeta
 - Brisanje pojedinih predmeta iz lista
 - Pregled trenutnog vremena za uneseni grad
-- Pregled 5-to dnevne prognoze za uneseni grad
+- Pregled petodnevne prognoze za uneseni grad
 - Kreiranje i editiranje putovanja
 - Brisanje putovanja
 
