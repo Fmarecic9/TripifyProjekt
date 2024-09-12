@@ -1,19 +1,16 @@
-# tripify
+# Tripify
+Aplikacija za organizaciju stvari pri odlasku na putovanje.
 
-## Project setup
-```
-npm install
-```
+### Korisničke funkcionalnosti
+Login i signup
+Kreiranje i editiranje listi predmeta
+Brisanje listi predmeta
+Editiranje pojedinih predmeta
+Brisanje pojedinih predmeta iz lista
+Pregled trenutnog vremena za uneseni grad
+Pregled 5-to dnevne prognoze za uneseni grad
+Kreiranje i editiranje putovanja
+Brisanje putovanja
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Javni link
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
