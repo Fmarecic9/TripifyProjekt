@@ -26,3 +26,7 @@ https://www.figma.com/proto/7fmOMz0Flz18WcdxJ8XbG3/Tripify-prototip?node-id=1-6&
 
 ### Javni hosting link
 Netlify: https://brilliant-moonbeam-ba1fa5.netlify.app
+
+## Login podaci za testiranje
+username: testsubject@gmail.com
+password: test123
